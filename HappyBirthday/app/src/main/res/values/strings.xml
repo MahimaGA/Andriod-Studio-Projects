@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Happy Birthday</string>
+    <string name="happy_birthday_dma_module">Happy Birthday DMA MODULE!</string>
+    <string name="signature_text">From Everyone</string>
 </resources>
