@@ -1,5 +1,6 @@
 package com.example.quadrants
 
+import android.media.Image
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -18,11 +19,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.quadrants.ui.theme.QuadrantsTheme
 import androidx.compose.material3.Text
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.height
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,15 +52,17 @@ fun MainPage() {
         Row(Modifier.weight(1f))
         {
             Cards(
-                title = stringResource(R.string.first_title),
-                description = stringResource(R.string.first_description),
-                backgroundColor= Color(0xFFEADDFF),
+                title = "Bahamas",
+                //description = stringResource(R.string.first_description),
+                image = painterResource(R.drawable.bahamas),
+                backgroundColor = Color(0xFFEADDFF),
                 modifier = Modifier.weight(1f),
             )
 
             Cards(
-                title = stringResource(R.string.second_title),
-                description = stringResource(R.string.second_description),
+                title = "Bangladesh",
+                //description = stringResource(R.string.second_description),
+                image = painterResource(R.drawable.bangladesh),
                 backgroundColor = Color(0xFFD0BCFF),
                 modifier = Modifier.weight(1f),
             )
@@ -64,15 +71,17 @@ fun MainPage() {
         Row(Modifier.weight(1f))
         {
             Cards(
-                title = stringResource(R.string.third_title),
-                description = stringResource(R.string.third_description),
+                title = "Canada",
+                //description = stringResource(R.string.third_description),
+                image = painterResource(R.drawable.canada),
                 backgroundColor = Color(0xFFB69DF8),
                 modifier = Modifier.weight(1f),
             )
 
             Cards(
-                title = stringResource(R.string.fourth_title),
-                description = stringResource(R.string.fourth_description),
+                title = "Russia",
+                //description = stringResource(R.string.fourth_description),
+                image = painterResource(R.drawable.russia),
                 backgroundColor = Color(0xFFF6EDFF),
                 modifier = Modifier.weight(1f),
             )
@@ -92,7 +101,8 @@ fun QuadrantsPreview() {
 @Composable
 public fun Cards(
     title: String,
-    description: String,
+    image: Painter,
+    //description: String,
     backgroundColor: Color,
     modifier: Modifier = Modifier
 )
@@ -105,15 +115,24 @@ public fun Cards(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Image(
+            painter = image,
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            alignment = Alignment.Center,
+            modifier = Modifier
+                .height(100.dp),
+
+        )
         Text(
             text = title,
             modifier = Modifier.padding(bottom = 16.dp),
             fontWeight = FontWeight.Bold
         )
-        Text(
-            text = description,
-            textAlign = TextAlign.Justify
-        )
+//        Text(
+//            text = description,
+//            textAlign = TextAlign.Justify
+//        )
 
     }
 }
