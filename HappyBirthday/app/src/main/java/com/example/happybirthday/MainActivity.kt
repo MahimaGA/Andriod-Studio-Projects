@@ -80,6 +80,7 @@ fun GreetingText(message: String, from: String, modifier: Modifier = Modifier) {
                 fontSize = 26.sp,
                 color = Color.White,
                 fontFamily = FontFamily.Cursive,
+                textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier
                     .padding(16.dp)
@@ -132,7 +133,7 @@ fun GreetingTextChristmas(message: String, from: String, modifier: Modifier = Mo
 }
 @Composable
 fun GreetingImageChristmas(message: String, from: String, modifier: Modifier = Modifier) {
-    val image = painterResource(R.drawable.christmas)
+    val image = painterResource(R.drawable.christmas_en)
     Box(modifier) {
         Image(
             painter = image,

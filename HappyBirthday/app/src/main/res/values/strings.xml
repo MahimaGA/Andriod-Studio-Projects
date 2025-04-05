@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Merry Christmas</string>
-    <string name="merry_christmas_dma_module">Merry Christmas</string>
-    <string name="signature_text">From Leeds Beckett Computing</string>
+    <string name="app_name" translatable="false">Merry Christmas</string>
+    <string name="merry_christmas_dma_module" translatable="false">Merry Christmas</string>
+    <string name="signature_text" translatable="false">From Leeds Beckett Computing</string>
 </resources>
