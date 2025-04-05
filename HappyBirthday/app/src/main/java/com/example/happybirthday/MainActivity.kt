@@ -133,7 +133,15 @@ fun GreetingTextChristmas(message: String, from: String, modifier: Modifier = Mo
 }
 @Composable
 fun GreetingImageChristmas(message: String, from: String, modifier: Modifier = Modifier) {
-    val image = painterResource(R.drawable.christmas_en)
+    val imageName = stringResource(id = R.string.christmas_image)
+    // Map the string resource to the actual drawable resource ID.
+    val imageRes = if (imageName == "christmas_es") {
+        R.drawable.christmas_es
+    } else {
+        R.drawable.christmas_en
+    }
+    // Load the image using painterResource.
+    val image = painterResource(id = imageRes)
     Box(modifier) {
         Image(
             painter = image,
