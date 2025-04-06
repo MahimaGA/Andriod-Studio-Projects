@@ -50,23 +50,35 @@ Include the provided question for your exercise and your answer in the space pro
 ---
 ### Quadrants ###
 
-|    **First Part ${\color{green}-- todo}$**    |    **Extension ${\color{green}-- todo}$**     |
+|    **First Part ${\color{blue}-- completed}$**    |    **Extension ${\color{blue}-- completed}$**     |
 |:---------------------------------------------:|:---------------------------------------------:|
-| ![quadrants part 1](./images/placeholder.jpg) | ![quadrants part 2](./images/placeholder.jpg) |
+| ![quadrants part 1](./image/quadrant.png) | ![quadrants part 2](./image/flags.png) |
 
 
 #### Question ####
-> *Please copy from the feedback branch when provided*
+> In the quadrants exercise, the layout of 2x2 has no issues on an orientation change. 
+> However, consider the impact a 3x2 in portrait would have when orientated. 
+> Is the preference for it to remain 3x2?
+> 
+> Typically, layouts *adapt* to meet user expectations. 
+> 
+>  ![quadrant_layout](image/quadrant_layout.png)
 >  
->  
->  
+> For this question, please provide an answer indicating how this would be done using *Composables*.
+> You should include in the answer the specific code elements that are aware of the device orientation.
+> A good place to start is **androidx.compose.ui.platform**
+> 
+> To further demonstrate your knowledge of the answer - include a screenshot of a modified version
+> of your quadrants to handle a 3x2 to 2x3 switch. Add as a final commit to your quadrants branch.
+> 
 
 #### Answer ####
-> *Please provide your answer in this space*
+> Yes, it remains 3x2.
 > 
+> We use LocalConfiguration to get the orientation
+> By using if else conditions we apply the layouts 3x2 (portrait) or 2x3 (landscape)
 > 
-> 
-> 
+>  ![landscape](image/landscape.png)
 
 ---
 
