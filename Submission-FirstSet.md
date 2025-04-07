@@ -82,24 +82,38 @@ Include the provided question for your exercise and your answer in the space pro
 
 ---
 
-### Woof ###
-
-| **First Part ${\color{green}-- todo}$**  |  **Extension ${\color{green}-- todo}$**  |
-|:----------------------------------------:|:----------------------------------------:|
-| ![woof part 1](./images/placeholder.jpg) | ![woof part 2](./images/placeholder.jpg) |
-
-
 #### Question ####
-> *Please copy from the feedback branch when provided*
+> Woof displays a list of Cards. The Material 3 API offers several card definitions.
+> 
+> https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary
+> 
+> Having looked at this documentation, please list the changes that will need to be made to produce 
+> the following effect on a card - a pressed state that removes a dropped shadow. See the screenshot, 
+> this shows an elevated default state with a raised shadow and a pressed state with no elevation.
+> 
+> ![woof interaction](image/woof_interaction.png)
 >  
->  
+> While this type of material change is the default behaviour for a Pressed State, how could this be overriden
+> so that a border is added on the Pressed state.
+> 
+>  ![woof custom_interaction](image/woof_custom_interaction.png)
+> 
+> Useful information can be found at:
+> 
+> https://developer.android.com/develop/ui/compose/touch-input/user-interactions/handling-interactions
+> 
+> Please add an additional commit to your woof branch and include a screenshot similar to the one shown. 
+> Please note the the colour of your card is unimportant and you should just use the card colours that you 
+> currently have in your project.
 >  
 
 #### Answer ####
-> *Please provide your answer in this space*
+> For pressed state that removes a dropped shadow, we create a MutableInteractionSource and use collectIsPressedAsState() to detect when the card is pressed.
+> then we use CardDefaults.cardElevation to give a default elevation as 4 and pressed elevation as 0 which removes the shadow
 > 
+> We can add border for pressed state by using Modifier.border() inside if isPressed() condition
 > 
-> 
+>  ![woof custom_interaction](image/woofqna.png) 
 > 
 
 ---
