@@ -23,6 +23,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -37,18 +38,19 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -63,10 +65,13 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            WoofTheme {
+            val darkThemeEnabled: Boolean = isSystemInDarkTheme()
+
+            WoofTheme(darkTheme = darkThemeEnabled) {
                 // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
                 ) {
                     WoofApp()
                 }
@@ -80,22 +85,17 @@ class MainActivity : ComponentActivity() {
  */
 @Composable
 fun WoofApp() {
-    Box(
-        modifier = Modifier
-            .background(Color.White),
-
-    ){
-        TopBar()
-
-        LazyColumn(
-            modifier = Modifier
-                .padding(top = 80.dp),
-        )
-        {
+    Scaffold(
+        topBar = {
+            TopBar()
+        }
+    ) { it ->
+        LazyColumn(contentPadding = it) {
             items(dogs) {
                 DogItem(
                     dog = it,
-                    modifier = Modifier.padding(8.dp)
+                    modifier = Modifier
+                        .padding(dimensionResource(R.dimen.padding_small))
                 )
             }
         }
@@ -191,20 +191,20 @@ fun DogInformation(
 /**
  * Composable that displays what the UI of the app looks like in light theme in the design tab.
  */
-@Preview
-@Composable
-fun WoofPreview() {
-    WoofTheme(darkTheme = false) {
-        WoofApp()
-    }
-}
+//@Preview
+//@Composable
+//fun WoofPreview() {
+//    WoofTheme(darkTheme = false) {
+//        WoofApp()
+//    }
+//}
 
 @Composable
 fun TopBar(modifier: Modifier = Modifier){
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(bottom = 40.dp,
+            .padding(bottom = 8.dp,
                 top= 16.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
@@ -222,12 +222,29 @@ fun TopBar(modifier: Modifier = Modifier){
         Text(
             text = "Woof",
             fontWeight = FontWeight.Bold,
+            fontStyle = FontStyle.Italic,
             textAlign = TextAlign.Center,
             fontSize = 30.sp,
-            fontFamily = FontFamily.Serif,
             modifier = Modifier
-                .padding(start = 10.dp),
+                .padding(start = 10.dp,
+                    end = 4.dp),
 
             )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun WoofLightPreview() {
+    WoofTheme(darkTheme = false) {
+        WoofApp()
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun WoofDarkPreview() {
+    WoofTheme(darkTheme = true) {
+        WoofApp()
     }
 }
