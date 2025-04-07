@@ -49,6 +49,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -58,6 +59,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.woof.data.Dog
 import com.example.woof.data.dogs
+import com.example.woof.ui.theme.ComicFont
 import com.example.woof.ui.theme.WoofTheme
 
 
@@ -66,7 +68,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val darkThemeEnabled: Boolean = isSystemInDarkTheme()
-
             WoofTheme(darkTheme = darkThemeEnabled) {
                 // A surface container using the 'background' color from the theme
                 Surface(
@@ -179,12 +180,14 @@ fun DogInformation(
             modifier = Modifier.padding(top = dimensionResource(R.dimen.padding_small)),
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
+            fontFamily = ComicFont,
             fontSize = 22.sp,
         )
         Text(
             text = stringResource(R.string.years_old, dogAge),
             fontSize = 18.sp,
-            )
+            fontFamily = ComicFont,
+        )
     }
 }
 
