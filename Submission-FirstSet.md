@@ -120,23 +120,42 @@ Include the provided question for your exercise and your answer in the space pro
 
 ### Affirmations ###
 
-|     **First Part ${\color{green}-- todo}$**     |     **Extension ${\color{green}-- todo}$**      |
+|    **First Part ${\color{blue}-- completed}$**    |    **Extension ${\color{blue}-- completed}$**     |
 |:-----------------------------------------------:|:-----------------------------------------------:|
-| ![affirmation part 1](./images/placeholder.jpg) | ![affirmation part 2](./images/placeholder.jpg) |
+| ![affirmation part 1](./image/affirmation.png) | ![affirmation part 2](./image/toast.png) |
 
 
 #### Question ####
-> *Please copy from the feedback branch when provided*
+> In the documentation for Compose and LazyColumn, there is the paragraph:
+> 
+> https://developer.android.com/jetpack/compose/lists
+> 
+> “If you need to display a large number of items (or a list of an unknown length), using a 
+> layout such as *Column* can cause performance issues, since all the items will be composed and 
+> laid out whether or not they are visible.”
+> 
+> Using the LayoutInspector tool and the Affirmation example further explain the above statement. 
+> It is expected that your included answer will include a screenshot from the LayoutInspector tool 
+> that shows the issue with using Column rather than LazyColumn for long lists.
+> 
+> Layout Inspector is a tool inside of Android Studio that will show live views from the emulator
+>
+> https://developer.android.com/studio/debug/layout-inspector
+> 
+> HINT: You will need to change the composable for the Affirmation example to: 
 >  
->  
->  
+>  ![affirmation_column_code](image/affirmation_column.png)
 
 #### Answer ####
-> *Please provide your answer in this space*
+> The statement above states that when we use Column for a long list, all the items are composed and laid out whether they are visible or not which may take longer to load or cause sluggish performance.
 > 
+>  ![affirmation_column_code](image/affirmationcolumn.png)
 > 
+> Whereas incase of Lazy, only the items visible on the screen are composed and laid out and disposes of the off-screen items
 > 
+>  ![affirmation_lazy_code](image/affirmationlazy.png)
 > 
+ 
 
 ---
 
