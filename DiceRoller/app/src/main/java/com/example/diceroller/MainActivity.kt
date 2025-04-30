@@ -24,6 +24,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role.Companion.Button
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -88,6 +90,18 @@ fun DiceWithButtonAndImage(modifier: Modifier = Modifier){
         Button(onClick = { result = (1..6).random()
             result2 = (1..6).random() }) {
             Text(text = stringResource(R.string.roll), fontSize = 24.sp)
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        if (result == result2){
+            Text(text="You rolled a double "+ result,
+                fontSize = 20.sp,
+                style = TextStyle(
+                    textDecoration = TextDecoration.Underline
+                )
+            );
+        }
+        else{
+            Text(text="")
         }
     }
 
