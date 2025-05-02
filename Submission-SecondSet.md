@@ -37,25 +37,38 @@ Include the provided question for your exercise and your answer in the space pro
 ---
 ### DiceRoller ###
 
-|    **First Part ${\color{green}-- todo}$**     |     **Extension ${\color{green}-- todo}$**     |
+|    **First Part ${\color{blue}-- completed}$**     |     **Extension ${\color{blue}-- completed}$**     |
 |:----------------------------------------------:|:----------------------------------------------:|
-| ![diceroller part 1](./images/placeholder.jpg) | ![diceroller part 2](./images/placeholder.jpg) |
+| ![diceroller part 1](./images/diceroller.png) | ![diceroller part 2](./images/dicenodouble.png) | ![diceroller part 2](./images/dicedouble.png) |
 
 
 #### Question ####
-> *Please copy from the feedback branch when provided*
->  
->  
+> *onCreate* is passed a parameter *(savedInstanceState: Bundle?)*. What is this? 
+> What value will it have on first run. Please evidence this value with the use of the debugger and an appropriate screenshot.   
+>
+> What may cause this Bundle to change in DiceRoller?
+>
+> In your own implementation of DiceRoller, are you using this Bundle in anyway. 
+> Please note that depending on how you have approached DiceRoller will determine the correct response to this section.
 >  
 
 #### Answer ####
-> *Please provide your answer in this space*
+> It is used to hold values you saved earlier in onSaveInstanceState
 > 
+> On first run it will have "null" value as shown in the screenshot below
 > 
+> (./images/diceqna.png)
 > 
+> The changes in DiceRoller may be caused when we rotate our deviceor change in laguage or font size as shown in the screenshot below.
 > 
+> (./images/diceqna2.png)
+> 
+> Yes, I am using Jetpack Compose "remember" function to hold the state
+> 
+>
 
 ---
+
 
 ### DessertClicker ###
 
