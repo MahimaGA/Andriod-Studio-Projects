@@ -93,6 +93,22 @@ fun ResultScreen(photos: String, modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
+fun LoadingScreenPreview() {
+    MarsPhotosTheme {
+        LoadingScreen()
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ErrorScreenPreview() {
+    MarsPhotosTheme {
+        ErrorScreen()
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
 fun ResultScreenPreview() {
     MarsPhotosTheme {
         ResultScreen(stringResource(R.string.placeholder_result))
