@@ -174,21 +174,22 @@ private fun DessertClickerApp(
     desserts: List<Dessert>
 ) {
 
-    var revenue by remember { mutableStateOf(0) }
-    var dessertsSold by remember { mutableStateOf(0) }
+    var revenue by rememberSaveable  { mutableStateOf(0) }
+    var dessertsSold by rememberSaveable  { mutableStateOf(0) }
 
-    val currentDessertIndex by remember { mutableStateOf(0) }
+    val currentDessertIndex by rememberSaveable  { mutableStateOf(0) }
 
-    var currentDessertPrice by remember {
+    var currentDessertPrice by rememberSaveable  {
         mutableStateOf(desserts[currentDessertIndex].price)
     }
-    var currentDessertImageId by remember {
+    var currentDessertImageId by rememberSaveable  {
         mutableStateOf(desserts[currentDessertIndex].imageId)
     }
 
     Scaffold(
         topBar = {
             val intentContext = LocalContext.current
+            val layoutDirection = LocalLayoutDirection.current
             DessertClickerAppBar(
                 onShareButtonClicked = {
                     shareSoldDessertsInformation(
@@ -200,6 +201,13 @@ private fun DessertClickerApp(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(MaterialTheme.colorScheme.primary)
+                    .padding(
+                        start = WindowInsets.safeDrawing.asPaddingValues()
+                            .calculateStartPadding(layoutDirection),
+                        end = WindowInsets.safeDrawing.asPaddingValues()
+                            .calculateEndPadding(layoutDirection),
+
+                    )
             )
         }
     ) { contentPadding ->
