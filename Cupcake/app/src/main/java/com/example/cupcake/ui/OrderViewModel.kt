@@ -15,7 +15,9 @@
  */
 package com.example.cupcake.ui
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
+import com.example.cupcake.data.DataSource
 import com.example.cupcake.data.OrderUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -44,14 +46,29 @@ class OrderViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(OrderUiState(pickupOptions = pickupOptions()))
     val uiState: StateFlow<OrderUiState> = _uiState.asStateFlow()
 
+//    /**
+//     * Set the quantity [numberCupcakes] of cupcakes for this order's state and update the price
+//     */
+//    fun setQuantity(numberCupcakes: Int) {
+//        _uiState.update { currentState ->
+//            currentState.copy(
+//                quantity = numberCupcakes,
+//                price = calculatePrice(quantity = numberCupcakes)
+//            )
+//        }
+//    }
+
     /**
      * Set the quantity [numberCupcakes] of cupcakes for this order's state and update the price
      */
-    fun setQuantity(numberCupcakes: Int) {
+    fun setQuantity(numberCupcakes: Int, context: Context) {
         _uiState.update { currentState ->
             currentState.copy(
                 quantity = numberCupcakes,
-                price = calculatePrice(quantity = numberCupcakes)
+                price = calculatePrice(
+                    quantity = numberCupcakes,
+                    context = context
+                )
             )
         }
     }
@@ -70,20 +87,41 @@ class OrderViewModel : ViewModel() {
      * Set the [desiredTopping] of cupcakes for this order's state.
      * Only 1 topping can be selected for the whole order.
      */
-    fun setTopping(desiredTopping: String) {
+    fun setTopping(desiredTopping: String, context: Context) {
         _uiState.update { currentState ->
-            currentState.copy(topping = desiredTopping)
+            currentState.copy(
+                topping = desiredTopping,
+                price = calculatePrice(
+                    topping = desiredTopping,
+                    context = context
+                )
+            )
         }
     }
+
+//    /**
+//     * Set the [pickupDate] for this order's state and update the price
+//     */
+//    fun setDate(pickupDate: String) {
+//        _uiState.update { currentState ->
+//            currentState.copy(
+//                date = pickupDate,
+//                price = calculatePrice(pickupDate = pickupDate)
+//            )
+//        }
+//    }
 
     /**
      * Set the [pickupDate] for this order's state and update the price
      */
-    fun setDate(pickupDate: String) {
+    fun setDate(pickupDate: String, context: Context) {
         _uiState.update { currentState ->
             currentState.copy(
                 date = pickupDate,
-                price = calculatePrice(pickupDate = pickupDate)
+                price = calculatePrice(
+                    pickupDate = pickupDate,
+                    context = context
+                )
             )
         }
     }
@@ -95,15 +133,35 @@ class OrderViewModel : ViewModel() {
         _uiState.value = OrderUiState(pickupOptions = pickupOptions())
     }
 
-    /**
-     * Returns the calculated price based on the order details.
-     */
+//    /**
+//     * Returns the calculated price based on the order details.
+//     */
+//    private fun calculatePrice(
+//        quantity: Int = _uiState.value.quantity,
+//        pickupDate: String = _uiState.value.date
+//    ): String {
+//        var calculatedPrice = quantity * PRICE_PER_CUPCAKE
+//        // If the user selected the first option (today) for pickup, add the surcharge
+//        if (pickupOptions()[0] == pickupDate) {
+//            calculatedPrice += PRICE_FOR_SAME_DAY_PICKUP
+//        }
+//        val formattedPrice = NumberFormat.getCurrencyInstance().format(calculatedPrice)
+//        return formattedPrice
+//    }
+
     private fun calculatePrice(
         quantity: Int = _uiState.value.quantity,
-        pickupDate: String = _uiState.value.date
+        topping: String = _uiState.value.topping,
+        pickupDate: String = _uiState.value.date,
+        context: Context
     ): String {
         var calculatedPrice = quantity * PRICE_PER_CUPCAKE
-        // If the user selected the first option (today) for pickup, add the surcharge
+
+        val toppingPrice = DataSource.toppings
+            .find { context.getString(it.first) == topping }
+            ?.second ?: 0.00
+        calculatedPrice += quantity * toppingPrice
+
         if (pickupOptions()[0] == pickupDate) {
             calculatedPrice += PRICE_FOR_SAME_DAY_PICKUP
         }
