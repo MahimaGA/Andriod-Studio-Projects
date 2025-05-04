@@ -235,7 +235,7 @@ fun CupcakeApp(
                     onCancelButtonClicked = {
                         cancelOrderAndNavigateToStart(viewModel, navController)
                     },
-                    onSelectionChanged = {},
+                    onSelectionChanged = { viewModel.setTopping(it) },
                     modifier = Modifier.fillMaxHeight(),
                     )
             }
