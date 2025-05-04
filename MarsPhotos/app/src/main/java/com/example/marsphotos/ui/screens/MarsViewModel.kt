@@ -30,11 +30,11 @@ import com.example.marsphotos.data.MarsPhotosRepository
 import kotlinx.coroutines.launch
 import java.io.IOException
 
-sealed interface MarsUiState {
-    data class Success(val photos: String) : MarsUiState
-    object Error : MarsUiState
-    object Loading : MarsUiState
-}
+//sealed interface MarsUiState {
+//    data class Success(val photos: String) : MarsUiState
+//    object Error : MarsUiState
+//    object Loading : MarsUiState
+//}
 
 //class MarsViewModel : ViewModel() {
 //    /** The mutable State that stores the status of the most recent request */
@@ -65,6 +65,12 @@ sealed interface MarsUiState {
 //        }
 //    }
 
+sealed interface MarsUiState {
+    data class Success(val photos: MarsPhoto) : MarsUiState
+    object Error : MarsUiState
+    object Loading : MarsUiState
+}
+
 class MarsViewModel(private val marsPhotosRepository: MarsPhotosRepository) : ViewModel() {
     var marsUiState: MarsUiState by mutableStateOf(MarsUiState.Loading)
         private set
@@ -76,8 +82,7 @@ class MarsViewModel(private val marsPhotosRepository: MarsPhotosRepository) : Vi
     private fun getMarsPhotos() {
         viewModelScope.launch {
             marsUiState = try {
-                val result = marsPhotosRepository.getMarsPhotos()[0]
-                MarsUiState.Success("First Mars image URL: ${result.imgSrc}")
+                MarsUiState.Success(marsPhotosRepository.getMarsPhotos()[0])
             } catch (e: IOException) {
                 MarsUiState.Error
             }
