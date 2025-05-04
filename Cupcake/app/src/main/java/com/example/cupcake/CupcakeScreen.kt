@@ -50,6 +50,13 @@ import com.example.cupcake.ui.OrderViewModel
 import com.example.cupcake.ui.SelectOptionScreen
 import com.example.cupcake.ui.StartOrderScreen
 
+enum class CupcakeScreen(@StringRes val title: Int) {
+    Start(title = R.string.app_name),
+    Flavor(title = R.string.choose_flavor),
+    Pickup(title = R.string.choose_pickup_date),
+    Summary(title = R.string.order_summary)
+}
+
 /**
  * Composable that displays the topBar and displays back button if back navigation is possible.
  */
@@ -58,8 +65,8 @@ import com.example.cupcake.ui.StartOrderScreen
 fun CupcakeAppBar(
     currentScreen: CupcakeScreen,
     canNavigateBack: Boolean,
-    navigateUp: () -> Unit = {},
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navigateUp: () -> Unit = {}
 ) {
     TopAppBar(
         title = { Text(stringResource(currentScreen.title)) },
@@ -115,7 +122,7 @@ fun CupcakeApp(
                     },
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(dimensionResource(R.dimen.padding_medium)),
+                        .padding(dimensionResource(R.dimen.padding_medium))
                 )
             }
             composable(route = CupcakeScreen.Flavor.name) {
@@ -156,24 +163,8 @@ fun CupcakeApp(
                     modifier = Modifier.fillMaxHeight()
                 )
             }
-
         }
     }
-}
-
-enum class CupcakeScreen(@StringRes val title: Int) {
-    Start(title = R.string.app_name),
-    Flavor(title = R.string.choose_flavor),
-    Pickup(title = R.string.choose_pickup_date),
-    Summary(title = R.string.order_summary)
-}
-
-private fun cancelOrderAndNavigateToStart(
-    viewModel: OrderViewModel,
-    navController: NavHostController
-) {
-    viewModel.resetOrder()
-    navController.popBackStack(CupcakeScreen.Start.name, inclusive = false)
 }
 
 private fun shareOrder(context: Context, subject: String, summary: String) {
@@ -188,4 +179,12 @@ private fun shareOrder(context: Context, subject: String, summary: String) {
             context.getString(R.string.new_cupcake_order)
         )
     )
+}
+
+private fun cancelOrderAndNavigateToStart(
+    viewModel: OrderViewModel,
+    navController: NavHostController
+) {
+    viewModel.resetOrder()
+    navController.popBackStack(CupcakeScreen.Start.name, inclusive = false)
 }
