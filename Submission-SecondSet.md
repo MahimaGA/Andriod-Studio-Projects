@@ -113,25 +113,43 @@ Include the provided question for your exercise and your answer in the space pro
 > Under the hood, viewModel() implements a scoped singleton (one instance per lifecycle boundary) and a basic form of dependency injection through ViewModelProvider.
 
 ---
+
 ### MarsPhoto ###
 
-|    **First Part ${\color{green}-- todo}$**    |    **Extension ${\color{green}-- todo}$**     |
+|    **First Part ${\color{blue}-- completed}$**    |    **Extension ${\color{blue}-- completed}$**     |
 |:---------------------------------------------:|:---------------------------------------------:|
-| ![marsphoto part 1](./image/placeholder.jpg) | ![marsphoto part 2](./image/placeholder.jpg) |
-
+| ![marsphoto part 1](./image/mars.png) | ![marsphoto part 2](./image/marse1.png) |
+|  | ![marsphoto part 2](./image/marse2.png) |
 
 #### Question ####
-> *Please copy from the feedback branch when provided*
+> In MarsPhoto an external API is used to populate the application. This required a change to the manifest
+> file to allow this to happen. What change was this?  
+>
+> If this change was not there, what would be the implication when the app was run? Please indicate as part of the 
+> answer the exception that is thrown by including a screenshot from the Logcat window.
+> 
+> Finally as part of this question – the manifest file will have an IntentFilter applied to an Activity. In the MarsPhoto, this would be: 
 >  
->  
->  
+> *&lt;intent-filter&gt;*
+> 
+> *&lt;action android:name="android.intent.action.MAIN" /&gt;*  
+> *&lt;category android:name="android.intent.category.LAUNCHER" /&gt;*
+> 
+> *&lt;/intent-filter &gt;*
+>
+> Please expand on the purpose of this  
 
 #### Answer ####
-> *Please provide your answer in this space*
+> By adding
+> <uses-permission android:name="android.permission.INTERNET" />
+> to the manifest, the app is granted Internet access—without it, any network call would fail with a java.lang.SecurityException
+> For example
+> ![marsphoto](./image/marqna.png)
 > 
-> 
-> 
-> 
+> The <intent-filter> entries define how Android launches the app: declaring
+> <action android:name="android.intent.action.MAIN" />
+> marks that component as the application’s primary entry point, while
+> <category android:name="android.intent.category.LAUNCHER" />
+> makes the app’s icon appear in the device launcher so users can start it from their home screen.
 
 ---
-
