@@ -49,9 +49,9 @@ object DataSource {
     )
 
     val toppings = listOf(
-        R.string.plain,
-        R.string.cherry,
-        R.string.powdered_sugar,
-        R.string.sprinkles
+        Pair(R.string.plain, 0.00),
+        Pair(R.string.cherry, 0.30),
+        Pair(R.string.powdered_sugar, 0.30),
+        Pair(R.string.sprinkles, 0.50)
     )
 }
