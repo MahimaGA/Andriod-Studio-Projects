@@ -79,8 +79,7 @@ fun OrderSummaryScreen(
     )
 
     Column(
-        modifier = modifier,
-        verticalArrangement = Arrangement.SpaceBetween
+        modifier = modifier
     ) {
         Column(
             modifier = Modifier.padding(dimensionResource(R.dimen.padding_medium)),
@@ -107,7 +106,7 @@ fun OrderSummaryScreen(
             ) {
                 Button(
                     modifier = Modifier.fillMaxWidth(),
-                    onClick = {onSendButtonClicked(newOrder, orderSummary)}
+                    onClick = { onSendButtonClicked(newOrder, orderSummary) }
                 ) {
                     Text(stringResource(R.string.send))
                 }
@@ -125,12 +124,10 @@ fun OrderSummaryScreen(
 @Preview
 @Composable
 fun OrderSummaryPreview(){
-    
     CupcakeTheme {
-
         OrderSummaryScreen(
             orderUiState = OrderUiState(0, "Test", "Test", "$300.00"),
-            onSendButtonClicked = { subject: String, summary: String -> },
+            onSendButtonClicked = { _: String, _: String -> },
             onCancelButtonClicked = {},
             modifier = Modifier.fillMaxHeight()
         )

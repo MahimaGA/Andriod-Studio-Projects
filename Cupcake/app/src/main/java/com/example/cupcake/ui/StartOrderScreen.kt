@@ -54,8 +54,7 @@ fun StartOrderScreen(
     modifier: Modifier = Modifier
 ){
     Column(
-        modifier = modifier,
-        verticalArrangement = Arrangement.SpaceBetween
+        modifier = modifier
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
