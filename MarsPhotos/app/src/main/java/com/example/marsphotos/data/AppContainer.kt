@@ -9,6 +9,7 @@ import retrofit2.Retrofit
 private const val BASE_URL = "https://android-kotlin-fun-mars-server.appspot.com"
 
 interface AppContainer {
+    val marsPhotosRepository: MarsPhotosRepository
 }
 
 class DefaultAppContainer : AppContainer {
@@ -19,5 +20,9 @@ class DefaultAppContainer : AppContainer {
 
     private val retrofitService : MarsApiService by lazy {
         retrofit.create(MarsApiService::class.java)
+    }
+
+    override val marsPhotosRepository: MarsPhotosRepository by lazy {
+        NetworkMarsPhotosRepository(retrofitService)
     }
 }
