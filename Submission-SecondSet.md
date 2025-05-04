@@ -15,31 +15,40 @@ Include the provided question for your exercise and your answer in the space pro
 
 ### Cupcake ###
 
-|   **First Part ${\color{green}-- todo}$**   |   **Extension ${\color{green}-- todo}$**    |
+|   **First Part ${\color{blue}-- completed}$**   |   **Extension ${\color{blue}-- completed}$**    |
 |:-------------------------------------------:|:-------------------------------------------:|
-| ![cupcake part 1](./images/placeholder.jpg) | ![cupcake part 2](./images/placeholder.jpg) |
+| ![cupcake part 1](./image/cupcake1.png) | ![cupcake part 2](./image/cupcake1.png) |
+| ![cupcake part 1](./image/cupcake2.png) | ![cupcake part 2](./image/cupcake2.png) |
+| ![cupcake part 1](./image/cupcake3.png) | ![cupcake part 2](./image/cupcakeex3.png) |
+| ![cupcake part 1](./image/cupcake4.png) | ![cupcake part 2](./image/cupcakeex4.png) |
+|  | ![cupcake part 2](./image/cupcakeex5.png) |
+
 
 
 #### Question ####
-> *Please copy from the feedback branch when provided*
+> In the CupCake example, a NavHostController object is used. This allows the popBackStack method
+> to be called. Which class does the NavHostController extend that contains the popBackStack() method? 
 >  
->  
->  
+> Which other method(s) in this parent class is/are used to move between the other screens in the Cupcake
+> example? How are these used - please make reference to the code and not just the visual output?  
 
 
 #### Answer ####
-> *Please provide your answer in this space*
+> In the Cupcake example, NavHostController inherits from NavController, which includes the popBackStack() method.
 > 
+> Another key method in this base class is navigate(), which is used to switch between screens in the Cupcake app.
 > 
+> The navigate() method requires a route parameter in the form of a String to identify the destination screen. It’s used in the code as follows:
 > 
+> navController.navigate(CupcakeScreen.Flavor.name)
 > 
-
+> This is used to navigate from Start to Flaour screen. similarly the function is also used to navigate to other screens.
 ---
 ### DiceRoller ###
 
 |    **First Part ${\color{blue}-- completed}$**     |     **Extension ${\color{blue}-- completed}$**     |
 |:----------------------------------------------:|:----------------------------------------------:|
-| ![diceroller part 1](./images/diceroller.png) | ![diceroller part 2](./images/dicenodouble.png) | ![diceroller part 2](./images/dicedouble.png) |
+| ![diceroller part 1](./image/diceroller.png) | ![diceroller part 2](./image/dicenodouble.png) | ![diceroller part 2](./image/dicedouble.png) |
 
 
 #### Question ####
@@ -57,11 +66,11 @@ Include the provided question for your exercise and your answer in the space pro
 > 
 > On first run it will have "null" value as shown in the screenshot below
 > 
-> (./images/diceqna.png)
+> ![diceroller](./image/diceqna.png)
 > 
 > The changes in DiceRoller may be caused when we rotate our deviceor change in laguage or font size as shown in the screenshot below.
 > 
-> (./images/diceqna2.png)
+> ![diceroller](./image/dicerollerqna2.png)
 > 
 > Yes, I am using Jetpack Compose "remember" function to hold the state
 > 
@@ -74,7 +83,7 @@ Include the provided question for your exercise and your answer in the space pro
 
 |      **First Part ${\color{green}-- todo}$**       |       **Extension ${\color{green}-- todo}$**       |
 |:--------------------------------------------------:|:--------------------------------------------------:|
-| ![dessertclicker part 1](./images/placeholder.jpg) | ![dessertclicker part 2](./images/placeholder.jpg) |
+| ![dessertclicker part 1](./image/placeholder.jpg) | ![dessertclicker part 2](./image/placeholder.jpg) |
 
 
 #### Question ####
@@ -96,7 +105,7 @@ Include the provided question for your exercise and your answer in the space pro
 
 |    **First Part ${\color{green}-- todo}$**    |    **Extension ${\color{green}-- todo}$**     |
 |:---------------------------------------------:|:---------------------------------------------:|
-| ![marsphoto part 1](./images/placeholder.jpg) | ![marsphoto part 2](./images/placeholder.jpg) |
+| ![marsphoto part 1](./image/placeholder.jpg) | ![marsphoto part 2](./image/placeholder.jpg) |
 
 
 #### Question ####
