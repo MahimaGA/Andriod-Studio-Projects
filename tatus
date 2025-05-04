@@ -1,0 +1,121 @@
+warning: in the working copy of 'MarsPhotos/app/src/main/java/com/example/marsphotos/data/AppContainer.kt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'MarsPhotos/app/src/main/java/com/example/marsphotos/data/MarsPhotosRepository.kt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'MarsPhotos/app/src/main/java/com/example/marsphotos/ui/MarsPhotosApp.kt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'MarsPhotos/app/src/main/java/com/example/marsphotos/ui/screens/MarsViewModel.kt', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/MarsPhotos/app/src/main/java/com/example/marsphotos/data/AppContainer.kt b/MarsPhotos/app/src/main/java/com/example/marsphotos/data/AppContainer.kt[m
+[1mindex 98a456b..5f88fd1 100644[m
+[1m--- a/MarsPhotos/app/src/main/java/com/example/marsphotos/data/AppContainer.kt[m
+[1m+++ b/MarsPhotos/app/src/main/java/com/example/marsphotos/data/AppContainer.kt[m
+[36m@@ -9,6 +9,7 @@[m [mimport retrofit2.Retrofit[m
+ private const val BASE_URL = "https://android-kotlin-fun-mars-server.appspot.com"[m
+ [m
+ interface AppContainer {[m
+[32m+[m[32m    val marsPhotosRepository: MarsPhotosRepository[m
+ }[m
+ [m
+ class DefaultAppContainer : AppContainer {[m
+[36m@@ -20,4 +21,8 @@[m [mclass DefaultAppContainer : AppContainer {[m
+     private val retrofitService : MarsApiService by lazy {[m
+         retrofit.create(MarsApiService::class.java)[m
+     }[m
+[32m+[m
+[32m+[m[32m    override val marsPhotosRepository: MarsPhotosRepository by lazy {[m
+[32m+[m[32m        NetworkMarsPhotosRepository(retrofitService)[m
+[32m+[m[32m    }[m
+ }[m
+\ No newline at end of file[m
+[1mdiff --git a/MarsPhotos/app/src/main/java/com/example/marsphotos/data/MarsPhotosRepository.kt b/MarsPhotos/app/src/main/java/com/example/marsphotos/data/MarsPhotosRepository.kt[m
+[1mindex 5584d3f..fcf75c5 100644[m
+[1m--- a/MarsPhotos/app/src/main/java/com/example/marsphotos/data/MarsPhotosRepository.kt[m
+[1m+++ b/MarsPhotos/app/src/main/java/com/example/marsphotos/data/MarsPhotosRepository.kt[m
+[36m@@ -1,7 +1,14 @@[m
+ package com.example.marsphotos.data[m
+ [m
+ import com.example.marsphotos.model.MarsPhoto[m
+[32m+[m[32mimport com.example.marsphotos.network.MarsApiService[m
+ [m
+ interface MarsPhotosRepository {[m
+     suspend fun getMarsPhotos(): List<MarsPhoto>[m
+ }[m
+[32m+[m
+[32m+[m[32mclass NetworkMarsPhotosRepository([m
+[32m+[m[32m    private val marsApiService: MarsApiService[m
+[32m+[m[32m) : MarsPhotosRepository {[m
+[32m+[m[32m    override suspend fun getMarsPhotos(): List<MarsPhoto> = marsApiService.getPhotos()[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/MarsPhotos/app/src/main/java/com/example/marsphotos/ui/MarsPhotosApp.kt b/MarsPhotos/app/src/main/java/com/example/marsphotos/ui/MarsPhotosApp.kt[m
+[1mindex d687a75..7278293 100644[m
+[1m--- a/MarsPhotos/app/src/main/java/com/example/marsphotos/ui/MarsPhotosApp.kt[m
+[1m+++ b/MarsPhotos/app/src/main/java/com/example/marsphotos/ui/MarsPhotosApp.kt[m
+[36m@@ -37,6 +37,25 @@[m [mimport com.example.marsphotos.R[m
+ import com.example.marsphotos.ui.screens.HomeScreen[m
+ import com.example.marsphotos.ui.screens.MarsViewModel[m
+ [m
+[32m+[m[32m//@Composable[m
+[32m+[m[32m//fun MarsPhotosApp() {[m
+[32m+[m[32m//    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()[m
+[32m+[m[32m//    Scaffold([m
+[32m+[m[32m//        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),[m
+[32m+[m[32m//        topBar = { MarsTopAppBar(scrollBehavior = scrollBehavior) }[m
+[32m+[m[32m//    ) {[m
+[32m+[m[32m//        Surface([m
+[32m+[m[32m//            modifier = Modifier[m
+[32m+[m[32m//                .fillMaxSize()[m
+[32m+[m[32m//                .padding(it)[m
+[32m+[m[32m//        ) {[m
+[32m+[m[32m//            val marsViewModel: MarsViewModel = viewModel()[m
+[32m+[m[32m//            HomeScreen([m
+[32m+[m[32m//                marsUiState = marsViewModel.marsUiState)[m
+[32m+[m[32m//        }[m
+[32m+[m[32m//    }[m
+[32m+[m[32m//}[m
+[32m+[m
+ @Composable[m
+ fun MarsPhotosApp() {[m
+     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()[m
+[36m@@ -49,9 +68,10 @@[m [mfun MarsPhotosApp() {[m
+                 .fillMaxSize()[m
+                 .padding(it)[m
+         ) {[m
+[31m-            val marsViewModel: MarsViewModel = viewModel()[m
+[32m+[m[32m            val marsViewModel: MarsViewModel = viewModel(factory = MarsViewModel.Factory)[m
+             HomeScreen([m
+[31m-                marsUiState = marsViewModel.marsUiState)[m
+[32m+[m[32m                marsUiState = marsViewModel.marsUiState[m
+[32m+[m[32m            )[m
+         }[m
+     }[m
+ }[m
+[1mdiff --git a/MarsPhotos/app/src/main/java/com/example/marsphotos/ui/screens/MarsViewModel.kt b/MarsPhotos/app/src/main/java/com/example/marsphotos/ui/screens/MarsViewModel.kt[m
+[1mindex 754468e..740c0fb 100644[m
+[1m--- a/MarsPhotos/app/src/main/java/com/example/marsphotos/ui/screens/MarsViewModel.kt[m
+[1m+++ b/MarsPhotos/app/src/main/java/com/example/marsphotos/ui/screens/MarsViewModel.kt[m
+[36m@@ -19,7 +19,12 @@[m [mimport androidx.compose.runtime.getValue[m
+ import androidx.compose.runtime.mutableStateOf[m
+ import androidx.compose.runtime.setValue[m
+ import androidx.lifecycle.ViewModel[m
+[32m+[m[32mimport androidx.lifecycle.ViewModelProvider[m
+[32m+[m[32mimport androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY[m
+ import androidx.lifecycle.viewModelScope[m
+[32m+[m[32mimport androidx.lifecycle.viewmodel.initializer[m
+[32m+[m[32mimport androidx.lifecycle.viewmodel.viewModelFactory[m
+[32m+[m[32mimport com.example.marsphotos.MarsPhotosApplication[m
+ import com.example.marsphotos.data.MarsPhotosRepository[m
+ //import com.example.marsphotos.network.MarsApi[m
+ import kotlinx.coroutines.launch[m
+[36m@@ -78,4 +83,14 @@[m [mclass MarsViewModel(private val marsPhotosRepository: MarsPhotosRepository) : Vi[m
+             }[m
+         }[m
+     }[m
+[32m+[m
+[32m+[m[32m    companion object {[m
+[32m+[m[32m        val Factory: ViewModelProvider.Factory = viewModelFactory {[m
+[32m+[m[32m            initializer {[m
+[32m+[m[32m                val application = (this[APPLICATION_KEY] as MarsPhotosApplication)[m
+[32m+[m[32m                val marsPhotosRepository = application.container.marsPhotosRepository[m
+[32m+[m[32m                MarsViewModel(marsPhotosRepository = marsPhotosRepository)[m
+[32m+[m[32m            }[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+ }[m
