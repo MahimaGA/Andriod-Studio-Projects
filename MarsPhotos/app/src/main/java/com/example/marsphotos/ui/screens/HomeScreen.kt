@@ -156,7 +156,7 @@ fun MarsPhotoCard(photo: MarsPhoto, modifier: Modifier = Modifier) {
             placeholder = painterResource(R.drawable.loading_img),
             contentDescription = stringResource(R.string.mars_photo),
             contentScale = ContentScale.Crop,
-            modifier = modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth()
         )
     }
 }
