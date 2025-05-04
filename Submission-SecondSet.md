@@ -49,7 +49,9 @@ Include the provided question for your exercise and your answer in the space pro
 
 |    **First Part ${\color{blue}-- completed}$**     |     **Extension ${\color{blue}-- completed}$**     |
 |:----------------------------------------------:|:----------------------------------------------:|
-| ![diceroller part 1](./image/diceroller.png) | ![diceroller part 2](./image/dicenodouble.png) | ![diceroller part 2](./image/dicedouble.png) |
+| ![diceroller part 1](./image/diceroller.png) | ![diceroller part 2](./image/dicenodouble.png) |
+|  | ![diceroller part 2](./image/dicedouble.png) |
+
 
 
 #### Question ####
@@ -144,7 +146,7 @@ Include the provided question for your exercise and your answer in the space pro
 > <uses-permission android:name="android.permission.INTERNET" />
 > to the manifest, the app is granted Internet access—without it, any network call would fail with a java.lang.SecurityException
 > For example
-> ![marsphoto](./image/marqna.png)
+> ![marsphoto](./image/marsqna.png)
 > 
 > The <intent-filter> entries define how Android launches the app: declaring
 > <action android:name="android.intent.action.MAIN" />
