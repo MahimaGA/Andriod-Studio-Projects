@@ -43,6 +43,7 @@ Include the provided question for your exercise and your answer in the space pro
 > navController.navigate(CupcakeScreen.Flavor.name)
 > 
 > This is used to navigate from Start to Flaour screen. similarly the function is also used to navigate to other screens.
+
 ---
 ### DiceRoller ###
 
@@ -78,29 +79,40 @@ Include the provided question for your exercise and your answer in the space pro
 
 ---
 
-
 ### DessertClicker ###
 
-|      **First Part ${\color{green}-- todo}$**       |       **Extension ${\color{green}-- todo}$**       |
+|      **First Part ${\color{blue}-- completed}$**       |       **Extension ${\color{blue}-- completed}$**       |
 |:--------------------------------------------------:|:--------------------------------------------------:|
-| ![dessertclicker part 1](./image/placeholder.jpg) | ![dessertclicker part 2](./image/placeholder.jpg) |
+| ![dessertclicker part 1](./image/dessert1.png) | ![dessertclicker part 2](./image/dessert1.png) |
+| ![dessertclicker part 1](./image/dessert2.png) | ![dessertclicker part 2](./image/dessert2.png) |
 
 
 #### Question ####
-> *Please copy from the feedback branch when provided*
->  
->  
->  
+> In completing the extension for DessertClicker you will have created a ViewModel class. Why is a viewmodel
+> class instance created with the first line shown below and not the second? 
+>
+> **val viewModel: DessertViewModel = viewModel()** 
+>
+> **val viewModel: DessertViewModel = DessertViewModel()** 
+>
+> How might this understanding be evidenced through the use of the debugger. Please include a screenshot.
+> 
+> What design patterns are being used here.  
+>
+> (Please note that if you have not completed the extension to DessertClicker - you can use MarsPhoto ViewModel as the 
+> case study for the question)  
 
 #### Answer ####
-> *Please provide your answer in this space*
+> Calling DessertViewModel() directly makes a new instance on every recomposition or configuration change, so any UI state is lost and old objects linger in memory. Using viewModel() hands off creation to ViewModelProvider, 
+> which gives you one persistent instance tied to the activity or navigation scope, so your state survives and no leaks occur.
 > 
+> With DessertViewModel() you’ll spot a log entry each time the screen is recreated; with viewModel() you’ll see just one “DessertViewModel created” message for the entire lifecycle, even across rotations or back-and-forth navigation:
 > 
+> ![Dessert](./image/dessertqna.png)
 > 
-> 
+> Under the hood, viewModel() implements a scoped singleton (one instance per lifecycle boundary) and a basic form of dependency injection through ViewModelProvider.
 
 ---
-
 ### MarsPhoto ###
 
 |    **First Part ${\color{green}-- todo}$**    |    **Extension ${\color{green}-- todo}$**     |
