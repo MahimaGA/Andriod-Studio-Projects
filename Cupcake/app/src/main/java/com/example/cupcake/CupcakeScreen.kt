@@ -202,10 +202,11 @@ fun CupcakeApp(
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(route = CupcakeScreen.Start.name) {
+                val context = LocalContext.current
                 StartOrderScreen(
                     quantityOptions = DataSource.quantityOptions,
                     onNextButtonClicked = {
-                        viewModel.setQuantity(it)
+                        viewModel.setQuantity(it, context)
                         navController.navigate(CupcakeScreen.Flavor.name)
                     },
                     modifier = Modifier
@@ -230,16 +231,17 @@ fun CupcakeApp(
                 val context = LocalContext.current
                 SelectOptionScreen(
                     subtotal = uiState.price,
-                    options = DataSource.toppings.map{ id -> context.resources.getString(id) },
+                    options = DataSource.toppings.map{ id -> context.resources.getString(id.first) },
                     onNextButtonClicked = { navController.navigate(CupcakeScreen.Pickup.name) },
                     onCancelButtonClicked = {
                         cancelOrderAndNavigateToStart(viewModel, navController)
                     },
-                    onSelectionChanged = { viewModel.setTopping(it) },
+                    onSelectionChanged = { viewModel.setTopping(it, context) },
                     modifier = Modifier.fillMaxHeight(),
                     )
             }
             composable(route = CupcakeScreen.Pickup.name) {
+                val context = LocalContext.current
                 SelectOptionScreen(
                     subtotal = uiState.price,
                     options = uiState.pickupOptions,
@@ -247,7 +249,7 @@ fun CupcakeApp(
                     onCancelButtonClicked = {
                         cancelOrderAndNavigateToStart(viewModel, navController)
                     },
-                    onSelectionChanged = { viewModel.setDate(it) },
+                    onSelectionChanged = { viewModel.setDate(it, context) },
                     modifier = Modifier.fillMaxHeight()
                 )
             }
