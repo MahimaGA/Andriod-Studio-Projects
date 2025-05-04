@@ -50,9 +50,17 @@ import com.example.cupcake.ui.OrderViewModel
 import com.example.cupcake.ui.SelectOptionScreen
 import com.example.cupcake.ui.StartOrderScreen
 
+//enum class CupcakeScreen(@StringRes val title: Int) {
+//    Start(title = R.string.app_name),
+//    Flavor(title = R.string.choose_flavor),
+//    Pickup(title = R.string.choose_pickup_date),
+//    Summary(title = R.string.order_summary)
+//}
+
 enum class CupcakeScreen(@StringRes val title: Int) {
     Start(title = R.string.app_name),
     Flavor(title = R.string.choose_flavor),
+    Topping(title = R.string.choose_topping),
     Pickup(title = R.string.choose_pickup_date),
     Summary(title = R.string.order_summary)
 }
@@ -87,16 +95,96 @@ fun CupcakeAppBar(
     )
 }
 
+//@Composable
+//fun CupcakeApp(
+//    viewModel: OrderViewModel = viewModel(),
+//    navController: NavHostController = rememberNavController()
+//) {
+//    val backStackEntry by navController.currentBackStackEntryAsState()
+//    val currentScreen = CupcakeScreen.valueOf(
+//        backStackEntry?.destination?.route ?: CupcakeScreen.Start.name
+//    )
+//
+//    Scaffold(
+//        topBar = {
+//            CupcakeAppBar(
+//                currentScreen = currentScreen,
+//                canNavigateBack = navController.previousBackStackEntry != null,
+//                navigateUp = { navController.navigateUp() }
+//            )
+//        }
+//    ) { innerPadding ->
+//        val uiState by viewModel.uiState.collectAsState()
+//
+//        NavHost(
+//            navController = navController,
+//            startDestination = CupcakeScreen.Start.name,
+//            modifier = Modifier.padding(innerPadding)
+//        ) {
+//            composable(route = CupcakeScreen.Start.name) {
+//                StartOrderScreen(
+//                    quantityOptions = DataSource.quantityOptions,
+//                    onNextButtonClicked = {
+//                        viewModel.setQuantity(it)
+//                        navController.navigate(CupcakeScreen.Flavor.name)
+//                    },
+//                    modifier = Modifier
+//                        .fillMaxSize()
+//                        .padding(dimensionResource(R.dimen.padding_medium))
+//                )
+//            }
+//            composable(route = CupcakeScreen.Flavor.name) {
+//                val context = LocalContext.current
+//                SelectOptionScreen(
+//                    subtotal = uiState.price,
+//                    options = DataSource.flavors.map { id -> context.resources.getString(id) },
+//                    onNextButtonClicked = { navController.navigate(CupcakeScreen.Pickup.name) },
+//                    onCancelButtonClicked = {
+//                        cancelOrderAndNavigateToStart(viewModel, navController)
+//                    },
+//                    onSelectionChanged = { viewModel.setFlavor(it) },
+//                    modifier = Modifier.fillMaxHeight()
+//                )
+//            }
+//            composable(route = CupcakeScreen.Pickup.name) {
+//                SelectOptionScreen(
+//                    subtotal = uiState.price,
+//                    options = uiState.pickupOptions,
+//                    onNextButtonClicked = { navController.navigate(CupcakeScreen.Summary.name) },
+//                    onCancelButtonClicked = {
+//                        cancelOrderAndNavigateToStart(viewModel, navController)
+//                    },
+//                    onSelectionChanged = { viewModel.setDate(it) },
+//                    modifier = Modifier.fillMaxHeight()
+//                )
+//            }
+//            composable(route = CupcakeScreen.Summary.name) {
+//                val context = LocalContext.current
+//                OrderSummaryScreen(
+//                    orderUiState = uiState,
+//                    onCancelButtonClicked = {
+//                        cancelOrderAndNavigateToStart(viewModel, navController)
+//                    },
+//                    onSendButtonClicked = { subject: String, summary: String ->
+//                        shareOrder(context, subject = subject, summary = summary)
+//                    },
+//                    modifier = Modifier.fillMaxHeight()
+//                )
+//            }
+//        }
+//    }
+//}
+
 @Composable
 fun CupcakeApp(
     viewModel: OrderViewModel = viewModel(),
     navController: NavHostController = rememberNavController()
 ) {
     val backStackEntry by navController.currentBackStackEntryAsState()
+
     val currentScreen = CupcakeScreen.valueOf(
         backStackEntry?.destination?.route ?: CupcakeScreen.Start.name
     )
-
     Scaffold(
         topBar = {
             CupcakeAppBar(
@@ -130,13 +218,26 @@ fun CupcakeApp(
                 SelectOptionScreen(
                     subtotal = uiState.price,
                     options = DataSource.flavors.map { id -> context.resources.getString(id) },
-                    onNextButtonClicked = { navController.navigate(CupcakeScreen.Pickup.name) },
+                    onNextButtonClicked = { navController.navigate(CupcakeScreen.Topping.name) },
                     onCancelButtonClicked = {
                         cancelOrderAndNavigateToStart(viewModel, navController)
                     },
                     onSelectionChanged = { viewModel.setFlavor(it) },
                     modifier = Modifier.fillMaxHeight()
                 )
+            }
+            composable(route = CupcakeScreen.Topping.name) {
+                val context = LocalContext.current
+                SelectOptionScreen(
+                    subtotal = uiState.price,
+                    options = DataSource.toppings.map{ id -> context.resources.getString(id) },
+                    onNextButtonClicked = { navController.navigate(CupcakeScreen.Pickup.name) },
+                    onCancelButtonClicked = {
+                        cancelOrderAndNavigateToStart(viewModel, navController)
+                    },
+                    onSelectionChanged = {},
+                    modifier = Modifier.fillMaxHeight(),
+                    )
             }
             composable(route = CupcakeScreen.Pickup.name) {
                 SelectOptionScreen(
