@@ -27,8 +27,30 @@ Welcome to my Android development portfolio for the DMA-2025 course. This reposi
 
 ## 🚀 Getting Started
 
-To explore any of the projects:
+-To explore any of the projects:
 
-1. **Clone the Repository**:
+**Clone the Repository**:
    ```bash
    git clone https://github.com/MahimaGA/Andriod-Studio-Projects.git
+   ```
+
+Open in Android Studio:
+
+- Launch Android Studio.
+
+- Click on Open an Existing Project.
+
+- Navigate to the cloned repository and select the desired project folder.
+
+Build and Run:
+
+- Ensure you have an emulator set up or a physical device connected.
+   
+- Click on the Run button to build and launch the app.
+
+
+🤝 Acknowledgments
+
+Gratitude to the DMA-2025 instructors and peers for their guidance and support throughout this learning journey.
+
+
